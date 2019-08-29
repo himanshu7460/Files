@@ -1,0 +1,153 @@
+CREATE TABLE Users
+(
+  UsersId VARCHAR2(5) NOT NULL,
+  FirstName VARCHAR2(20) NOT NULL,
+  LastName VARCHAR2(20),
+  UsersEmail VARCHAR2(30),
+  PRIMARY KEY (UsersId)
+);
+
+CREATE TABLE Country
+(
+  CountryId VARCHAR2(5) NOT NULL,
+  CountryName VARCHAR2(20) NOT NULL,
+  PRIMARY KEY (CountryId)
+);
+
+CREATE TABLE Satellite
+(
+  SatelliteId VARCHAR2(5) NOT NULL,
+  SatelliteName VARCHAR2(20) NOT NULL,
+  PRIMARY KEY (SatelliteId)
+);
+
+CREATE TABLE WeatherStation
+(
+  WeatherStationId VARCHAR2(5) NOT NULL,
+  WeatherStationName VARCHAR2(20) NOT NULL,
+  PRIMARY KEY (WeatherStationId)
+);
+
+CREATE TABLE UsersUContact
+(
+  UsersId VARCHAR2(5) NOT NULL,
+  UContact NUMBER(10) NOT NULL,
+  PRIMARY KEY (UContact, UsersId),
+  FOREIGN KEY (UsersId) REFERENCES Users(UsersId)
+);
+
+CREATE TABLE City
+(
+  CityPincode NUMBER(6) NOT NULL,
+  CityName VARCHAR2(20) NOT NULL,
+  CityLatitude NUMBER(5,2),
+  CityLongitude NUMBER(5,2),
+  CountryId VARCHAR2(5) NOT NULL,
+  PRIMARY KEY (CityPincode),
+  FOREIGN KEY (CountryId) REFERENCES Country(CountryId)
+);
+
+CREATE TABLE Server
+(
+  ServerId VARCHAR2(5) NOT NULL,
+  ServerLocation VARCHAR2(20),
+  WeatherStationId VARCHAR2(5) NOT NULL,
+  PRIMARY KEY (ServerId),
+  FOREIGN KEY (WeatherStationId) REFERENCES WeatherStation(WeatherStationId)
+);
+
+CREATE TABLE Selects
+(
+  UsersId VARCHAR2(5) NOT NULL,
+  CityPincode NUMBER(6) NOT NULL,
+  PRIMARY KEY (UsersId, CityPincode),
+  FOREIGN KEY (UsersId) REFERENCES Users(UsersId),
+  FOREIGN KEY (CityPincode) REFERENCES City(CityPincode)
+);
+
+CREATE TABLE HourlyForecastLog
+(
+  StartDateTime TIMESTAMP NOT NULL,
+  Humidity NUMBER(5,2),
+  Visibility VARCHAR2(10),
+  Pressure NUMBER(5,2),
+  WindSpeed NUMBER(5,2),
+  WindDirection VARCHAR2(2),
+  Temperature NUMBER(5,2),
+  FeelsLikeTemperature NUMBER(5,2),
+  WeatherStatus VARCHAR2(20),
+  CityPincode NUMBER(6,0) NOT NULL,
+  PRIMARY KEY (CityPincode, StartDateTime),
+  FOREIGN KEY (CityPincode) REFERENCES City(CityPincode)
+  Constraint HourlyForecastLogWDConstraint Check (WindDirection In ('N','S','E','W','NE','NW','SE','SW'))
+  Constraint HourlyForecastLogVisibilityConstraint Check (Visibility In ('VeryHigh','High','Medium','Low','VeryLow'))
+  Constraint HourlyForecastLogWSConstraint Check (WeatherStatus In ('Sunny','Cloudy','Rainy','Snowy','Windy'))
+  );
+
+CREATE TABLE DailyForecastLog
+(
+  CalendarDate DATE NOT NULL,
+  SunriseTime TIMESTAMP,
+  SunsetTime TIMESTAMP,
+  AverageHumidity NUMBER(5,2),
+  MaxTemperature NUMBER(5,2),
+  MinTemperature NUMBER(5,2),
+  WeatherStatus VARCHAR2(20),
+  CityPincode NUMBER(6) NOT NULL,
+  PRIMARY KEY (CalendarDate,CityPincode),
+  FOREIGN KEY (CityPincode) REFERENCES City(CityPincode),
+  Constraint DailyForecastLogWSConstraint Check (WeatherStatus In ('Sunny','Cloudy','Snowy','Rainy','Windy'))
+);
+
+CREATE TABLE getshourly
+(
+  ServerId VARCHAR2(5) NOT NULL,
+  StartDateTime TIMESTAMP NOT NULL,
+  CityPincode NUMBER(6) NOT NULL,
+  PRIMARY KEY (ServerId, StartDateTime, CityPincode),
+  FOREIGN KEY (ServerId) REFERENCES Server(ServerId),
+  FOREIGN KEY (StartDateTime, CityPincode) REFERENCES HourlyForecastLog(StartDateTime, CityPincode)
+);
+
+CREATE TABLE getsdaily
+(
+  ServerId VARCHAR2(5) NOT NULL,
+  CalendarDate DATE NOT NULL,
+  CityPincode NUMBER(6) NOT NULL,
+  PRIMARY KEY (ServerId, CalendarDate, CityPincode),
+  FOREIGN KEY (ServerId) REFERENCES Server(ServerId),
+  FOREIGN KEY (CalendarDate, CityPincode) REFERENCES DailyForecastLog(CalendarDate, CityPincode)
+);
+
+CREATE TABLE getsfrom
+(
+  SatelliteId VARCHAR2(5) NOT NULL,
+  ServerId VARCHAR2(5) NOT NULL,
+  PRIMARY KEY (SatelliteId, ServerId),
+  FOREIGN KEY (SatelliteId) REFERENCES Satellite(SatelliteId),
+  FOREIGN KEY (ServerId) REFERENCES Server(ServerId)
+);
+
+CREATE TABLE Employee
+(
+  EmployeeId VARCHAR2(5) NOT NULL,
+  EmpFirstName VARCHAR2(20) NOT NULL,
+  EmpLastName VARCHAR2(20),
+  EmpDOB DATE,
+  Designation VARCHAR2(20) NOT NULL,
+  ServerId VARCHAR2(5) NOT NULL,
+  WeatherStationId VARCHAR2(5) NOT NULL,
+  ManagerId VARCHAR2(5),
+  PRIMARY KEY (EmployeeId),
+  FOREIGN KEY (ServerId) REFERENCES Server(ServerId),
+  FOREIGN KEY (WeatherStationId) REFERENCES WeatherStation(WeatherStationId),
+  FOREIGN KEY (ManagerId) REFERENCES Employee(EmployeeId)
+);
+
+CREATE TABLE EmployeeEmpContact
+(
+  EmpContact NUMBER(10) NOT NULL,
+  EmployeeId VARCHAR2(5) NOT NULL,
+  PRIMARY KEY (EmpContact, EmployeeId),
+  FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId)
+);

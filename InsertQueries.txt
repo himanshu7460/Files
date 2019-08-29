@@ -1,0 +1,246 @@
+Users
+BEGIN
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+Values ('Himanshu', 'Vaghela', 'U1','hv@gmail.com');
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+Values ('Jaimish', 'Trivedi', 'U2','JT@gmail.com');
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+Values ('Sameep', 'Baraiya', 'U3','sb@gmail.com');
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+values ('Adil', 'Otha', 'U4','ao@gmail.com');
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+Values ('Aayush', 'Panchal', 'U5','ap@gmail.com');
+Insert into Users(FirstName, LastName, UsersId,UsersEmail)
+Values ('Bhupendra', 'Dabhi', 'U6','bd@gmail.com');
+END
+Country
+BEGIN
+Insert into Country(CountryId,CountryName)
+Values ('CY1','India');
+Insert into Country(CountryId,CountryName)
+Values ('CY2','China');
+Insert into Country(CountryId,CountryName)
+Values ('CY3','Thailand');
+Insert into Country(CountryId,CountryName)
+Values ('CY4','Singapore');
+Insert into Country(CountryId,CountryName)
+Values ('CY5','Germany');
+Insert into Country(CountryId,CountryName)
+Values ('CY6','USA');
+Insert into Country(CountryId,CountryName)
+Values ('CY7','Canada');
+Insert into Country(CountryId,CountryName)
+Values ('CY8','UK');
+END
+Satellite
+BEGIN
+Insert into Satellite(SatelliteId,SatelliteName)
+Values('S1','Aryabhatta');
+Insert into Satellite(SatelliteId,SatelliteName)
+Values('S2','Bhaskara1');
+Insert into Satellite(SatelliteId,SatelliteName)
+Values('S3','Bhaskara2');
+Insert into Satellite(SatelliteId,SatelliteName)
+Values('S4','IRS1A');
+Insert into Satellite(SatelliteId,SatelliteName)
+Values('S5','INSAT1C')
+END
+WeatherStation
+BEGIN
+Insert into WeatherStation
+Values('WS1','Ahmedabad');
+Insert into WeatherStation
+Values('WS2','Rajkot');
+Insert into WeatherStation
+Values('WS3','Bhavnagar');
+Insert into WeatherStation
+Values('WS4','Porbandar');
+Insert into WeatherStation
+Values('WS5','Surat');
+Insert into WeatherStation
+Values('WS6','Nashik');
+Insert into WeatherStation
+Values('WS7','Mumbai');
+END
+UsersUcontact
+BEGIN
+Insert into UsersUcontact(Usersid,UContact)
+Values('U1',7623927428);
+Insert into UsersUcontact(Usersid,UContact)
+Values('U2',7227008511);
+Insert into UsersUcontact(Usersid,UContact)
+Values('U3',9284675963);
+Insert into UsersUcontact(Usersid,UContact)
+Values('U4',7849135933);
+Insert into UsersUcontact(Usersid,UContact)
+Values('U5',8645436943);
+Insert into UsersUcontact(Usersid,UContact)
+Values('U6',9876541232);
+END
+City
+BEGIN
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Ahmedabad',85.43,57.76,380027,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Nadiad',156.23,57.36,380078,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Rajkot',128.23,58.36,380045,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Surat',138.23,51.36,380745,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Bhavnagar',198.23,23.46,380063,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Mumbai',185.23,90.26,380041,'CY1');
+Insert into City(CityName,CityLongitude,CityLatitude,CityPincode,CountryId)
+Values('Hyderabad',170.23,35.86,380086,'CY1');
+END
+Server
+BEGIN
+Insert into Server(ServerId,ServerLocation,SatelliteId,WeatherStationId)
+Values('SE3','BhavnagariArea','S3','WS3');
+Insert into Server(ServerId,ServerLocation,SatelliteId,WeatherStationId)
+Values('SE2','RajkotRotary','S2','WS2');
+Insert into Server(ServerId,ServerLocation,SatelliteId,WeatherStationId)
+Values('SE1','RTOCIRCLE','S1','WS1');
+END
+Selects
+BEGIN
+Insert into Selects
+Values('U1',380027);
+Insert into Selects
+Values('U1',380078);
+Insert into Selects
+Values('U1',380041);
+Insert into Selects
+Values('U2',380027);
+Insert into Selects
+Values('U3',380063);
+Insert into Selects
+Values('U4',380063);
+Insert into Selects
+Values('U5',380027);
+Insert into Selects
+Values('U6',380027);
+END
+HourlyForecastLog
+BEGIN
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 06:14:00.74',10,'High',10,10,'NE',10,8,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 07:14:00',7,'High',7,7,'NE',7,7,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 05:14:00.74',10,'High',5,5,'NE',5,5,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 04:14:00.74',4,'High',4,4,'NE',4,4,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 03:14:00.74',10,'High',3,3,'NE',3,3,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 02:14:00.74',10,'High',2,2,'NE',2,2,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 01:14:00.74',1,'High',1,1,'NE',1,1,'Sunny',380027,'SE1');
+INSERT INTO
+HourlyForecastLog(StartDateTime,Humidity,Visibility,Pressure,WindSpeed,WindDirection,Temperature,FeelsLikeTemperature,WeatherStatus,CityPincode,ServerId)
+VALUES(timestamp '2019-08-01 00:14:00.74',10,'High',0,0,'NE',0,0,'Sunny',380027,'SE1');
+END
+DailyForecastLog
+BEGIN
+insert into DailyForecastLog(CalendarDate,ServerId,Weatherstatus,CityPincode,SunriseTime,SunsetTime,AverageHumidity,MinTemperature,MaxTemperature)
+values(to_date ('27/AUGUST/2019'),'SE1','Sunny',380027, timestamp '2019-08-27 06:00:08.74', timestamp '2019-08-27 19:14:00.74',27,20,30);
+insert into DailyForecastLog(CalendarDate,ServerId,Weatherstatus,CityPincode)
+values(to_date ('28/AUGUST/2019'),'SE1','Rainy',380027, timestamp '2019-08-28 06:00:08.74', timestamp '2019-08-28 19:15:00.74',28,20,30);
+insert into DailyForecastLog(CalendarDate,ServerId,Weatherstatus,CityPincode)
+values(to_date ('29/AUGUST/2019'),'SE1','Cloudy',380027, timestamp '2019-08-29 06:00:08.74', timestamp '2019-08-29 19:16:00.74',29,20,30);
+insert into DailyForecastLog(CalendarDate,ServerId,Weatherstatus,CityPincode)
+values(to_date ('30/AUGUST/2019'),'SE1','Sunny',380027, timestamp '2019-08-30 06:00:08.74', timestamp '2019-08-30 19:17:00.74',30,20,30);
+insert into DailyForecastLog(CalendarDate,ServerId,Weatherstatus,CityPincode)
+values(to_date ('31/AUGUST/2019'),'SE1','Sunny',380027, timestamp '2019-08-31 06:00:08.74', timestamp '2019-08-31 19:18:00.74',31,20,30);
+END
+Employee
+BEGIN
+Insert into Employee(EmployeeId,EmpFirstName,EmpLastName,Designation,EmpDOB,ServerId,WeatherStationId,ManagerId)
+values(
+'E1','King','Puri','CEO','25/AUGUST/1997','SE1','WS1',NULL);
+Insert into Employee(EmployeeId,EmpFirstName,EmpLastName,Designation,EmpDOB,ServerId,WeatherStationId,ManagerId)
+values(
+'E2','Suresh','Puri','HRManager','05/AUGUST/1997','SE1','WS1','E1');
+Insert into Employee(EmployeeId,EmpFirstName,EmpLastName,Designation,EmpDOB,ServerId,WeatherStationId,ManagerId)
+values(
+'E3','Mahesh','Puri','Electrician','25/MAY/1997','SE1','WS1','E2');
+Insert into Employee(EmployeeId,EmpFirstName,EmpLastName,Designation,EmpDOB,ServerId,WeatherStationId,ManagerId)
+values(
+'E4','Jayesh','Puri','Programmer','15/JULY/1997','SE1','WS1','E2');
+END
+EmployeeEmpContact
+BEGIN
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E1',1234567890);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E1',456123890);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E2',326123890);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E3',126123890);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E4',456743890);
+END
+EmployeeEmpContact
+BEGIN
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E1',9826623561); 
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E1',9887623561);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E1',9834923561);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E2',9875323561);
+Insert into EmployeeEmpContact(EmployeeId,EmpContact)
+Values('E2',9895123561);
+END
+getshourly
+BEGIN
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 12.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 01.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 02.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 03.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 04.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 05.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 06.14.00.740000 AM',380027);
+Insert into getshourly(ServerId,StartDateTime,CityPincode)
+Values('SE1','01-AUG-19 07.14.00.000000 AM',380027);
+END
+getsdaily
+BEGIN
+Insert into getsdaily(ServerId,CalendarDate,CityPincode)
+Values('SE1','27-AUG-19	',380027);
+Insert into getsdaily(ServerId,CalendarDate,CityPincode)
+Values('SE1','28-AUG-19	',380027);
+Insert into getsdaily(ServerId,CalendarDate,CityPincode)
+Values('SE1','29-AUG-19	',380027);
+Insert into getsdaily(ServerId,CalendarDate,CityPincode)
+Values('SE1','30-AUG-19	',380027);
+Insert into getsdaily(ServerId,CalendarDate,CityPincode)
+Values('SE1','31-AUG-19	',380027);
+END
+getsfrom
+BEGIN
+Insert into getsfrom(ServerId,SatelliteId)
+Values('SE1','S1');
+Insert into getsfrom(ServerId,SatelliteId)
+Values('SE2','S1');
+Insert into getsfrom(ServerId,SatelliteId)
+Values('SE3','S2');
+END
